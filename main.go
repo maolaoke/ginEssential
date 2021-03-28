@@ -18,8 +18,9 @@ type User struct{
 
 func main(){
 	db := common.GetDB()
+	
 	defer db.Close()
-	r:=gin.Default()
+	var r *gin.Engine = gin.Default()
 	r = CollectRoute(r)
 	panic(r.Run())
 }
