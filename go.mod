@@ -1,4 +1,4 @@
-module ginessential
+module ginEssential
 
 go 1.16
 
