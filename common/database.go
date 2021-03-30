@@ -1,16 +1,36 @@
 package common
 
 import (
+	"fmt"
 	"ginEssential/model"
-	
+	"ginEssential/util"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/spf13/viper"
 )
 
-var DB *gorm.DB = initDB()
+var DB *gorm.DB = InitDB()
 
-func initDB() *gorm.DB {
-	db, err := gorm.Open("mysql", "root:root@(127.0.0.1:3306)/ginessential?charset=utf8mb4&parseTime=True&loc=Local")
+func InitDB() *gorm.DB {
+	util.InitConfig()
+	driverName := viper.GetString("datasource.driverName")
+	host := viper.GetString("datasource.host")
+	port := viper.GetString("datasource.port")
+	database := viper.GetString("datasource.database")
+	username := viper.GetString("datasource.username")
+	password := viper.GetString("datasource.password")
+	charset := viper.GetString("datasource.charset")
+	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True&loc=Local",
+	username,
+	password,
+	host,
+	port,
+	database,
+	charset)
+	fmt.Println(args)
+	
+	db, err := gorm.Open(driverName, args)
 	if err != nil {
 		panic(err)
 	}

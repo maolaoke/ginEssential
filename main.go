@@ -2,9 +2,11 @@ package main
 
 import (
 	"ginEssential/common"
+	"ginEssential/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	"github.com/spf13/viper"
 )
 
 
@@ -17,11 +19,19 @@ type User struct{
 
 
 func main(){
+	util.InitConfig()
 	db := common.GetDB()
 	
 	defer db.Close()
 	var r *gin.Engine = gin.Default()
 	r = CollectRoute(r)
+
+	port := viper.GetString("server.port")
+	if port != ""{
+		panic(r.Run(":"+port))
+	}
 	panic(r.Run())
+
 }
+
 

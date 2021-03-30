@@ -3,7 +3,6 @@ package common
 import (
 	"ginEssential/model"
 	"time"
-
 	"github.com/dgrijalva/jwt-go"
 )
 
@@ -22,8 +21,8 @@ func GetToken(user model.User)(string ,error){
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 			IssuedAt: time.Now().Unix(),
-			Issuer: "oceanlearn.tech",
-			Subject: "user token",
+			// Issuer: "oceanlearn.tech",
+			// Subject: "user token",
 		},
 	}
 
