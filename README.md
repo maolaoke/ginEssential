@@ -1,6 +1,6 @@
 ## go+gin+grom+JWT+viper实现登录注册功能
 
-### 1 如何创建server监听请求
+### 1 如何gin创建server监听请求
 
 > 安装gin
 
